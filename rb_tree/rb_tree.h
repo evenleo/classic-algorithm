@@ -70,6 +70,21 @@ public:
     }
     return x;
   }
+  node_ptr lookup(Key k) 
+  {
+    node_ptr x = nullptr;
+    node_ptr y = root();
+    while (y != nullptr) 
+    {
+      if (k <= y->key) 
+      {
+        x = y;
+        y = y->left;
+      } else 
+        y = y->right;
+    }
+    return x ? x : minimum(root());
+  }
 
 private:
   node_ptr& root() const { return header->parent; }
@@ -203,7 +218,7 @@ private:
     y->parent = x->parent;          /*     / \  ============>    / \    */
     if (x == root)                  /*    y   d                 b   x   */ 
       root = y;                     /*   / \                       / \  */       
-    else if (x = x->parent->left)   /*  b   c                     c   d */       
+    else if (x == x->parent->left)  /*  b   c                     c   d */       
       x->parent->left = y;               
     else                           
       x->parent->right = y;

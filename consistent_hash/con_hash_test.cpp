@@ -10,9 +10,17 @@ int main(int argc, char **argv)
   conhash.add_node("192.168.0.1:8080", 2);
   conhash.add_node("192.168.0.2:8081", 3);
   conhash.add_node("10.0.1.56:8082", 2);
-  conhash.add_node("10.0.1.57:8083", 2);
+  conhash.add_node("10.0.1.57:8083", 3);
 
-  std::cout << "insert done!" << std::endl;
-
+  conhash.helper();
   conhash.visit_vnode();
+
+  std::string server_name = conhash.get_server_name("127.0.0.1");
+  cout << "server_name: " << server_name << std::endl;
+  server_name = conhash.get_server_name("128.0.0.1");
+  cout << "server_name: " << server_name << std::endl;
+
+  conhash.del_vnode("10.0.1.56:8082");
+  server_name = conhash.get_server_name("128.0.0.1");
+  cout << "server_name: " << server_name << std::endl;
 }

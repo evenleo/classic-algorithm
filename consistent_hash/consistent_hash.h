@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "rb_tree.h"
+#include "rb_tree_helper.h"
 #include "md5hash.h"
 
 class consistent_hash {
@@ -16,7 +17,7 @@ public:
   };
 
 private:
-  typedef unsigned int uint;
+  typedef int64_t uint;
   
   rb_tree<uint, vnode> vnode_tree;
   md5hash hash;
@@ -46,20 +47,32 @@ public:
       for (int i = 0; i < it->value.vnum; ++i)
       {
         std::string key_str = node_name + "#" + std::to_string(i);
-        key = hash.get_key(key_str);
-        vnode_tree.erase(key);
+        uint k = hash.get_key(key_str);
+        vnode_tree.erase(k);
       }
     }
     vnode_tree.erase(key);
     return true;
   }
-
-  bool visit_vnode() 
+  std::string get_server_name(const std::string& name)
+  {
+    uint key = hash.get_key(name);
+    auto it = vnode_tree.lookup(key);
+    return it->value.name;
+  }
+  void visit_vnode() 
   {
     rb_tree<uint, vnode>::Node* root = vnode_tree.root();
     visit(root);
-    return true;
   }
+  
+  void helper()
+  {
+    rb_tree_helper<rb_tree<uint, vnode>::Node> pt(vnode_tree.root());
+    pt.watch();
+    assert(pt.is_rb_tree());
+  }
+
 private:
   void visit(rb_tree<uint, vnode>::Node* node) 
   {
