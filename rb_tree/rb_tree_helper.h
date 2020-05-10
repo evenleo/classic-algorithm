@@ -58,9 +58,9 @@ private:
     if (node != nullptr)
     {
       if (node->color)
-        printf("%d\n", node->key);
+        printf("%ld\n", node->key);
       else
-        printf("\033[1;31;40m%d\n\033[0m", node->key); // 红色打印
+        printf("\033[1;31;40m%ld\n\033[0m", node->key); // 红色打印
     }
     else
       printf("\n");

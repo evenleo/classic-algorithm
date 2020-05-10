@@ -24,6 +24,9 @@ public:
     Node() {}
   };
   typedef Node* node_ptr;
+  
+private:
+  node_ptr header;
 
 public:
   rb_tree() { rb_tree_init(); }
@@ -48,14 +51,16 @@ public:
     node_ptr n = find(k);
     if (n != nullptr)
     {
-      node_ptr y = rb_tree_rebalance_for_erase(n, header->parent, header->left, header->right);
+      node_ptr y = rb_tree_rebalance_for_erase(n, 
+                   header->parent, header->left, header->right);
       delete y;
     }
   }
   node_ptr find(Key k) 
   {
     node_ptr x = root();
-    while (x != nullptr) {
+    while (x != nullptr) 
+    {
       if (k < x->key)
         x = x->left;
       else if (k > x->key)
@@ -102,10 +107,12 @@ private:
     {
       z = new Node(k, v);
       y->left = z;
-      if (y == header) {
+      if (y == header) 
+      {
         root() = z;
         rightmost() = z;
-      } else if (y == leftmost())
+      } 
+      else if (y == leftmost())
         leftmost() = z;
     } 
     else 
@@ -222,10 +229,12 @@ private:
           y = y->left;
         x = y->right;
       }
-    if (y != z) {                 // relink y in place of z.  y is z's successor
+    if (y != z) 
+    {                 // relink y in place of z.  y is z's successor
       z->left->parent = y; 
       y->left = z->left;
-      if (y != z->right) {
+      if (y != z->right) 
+      {
         x_parent = y->parent;
         if (x) x->parent = y->parent;
         y->parent->left = x;      // y must be a left child
@@ -245,7 +254,8 @@ private:
       y = z;
       // y now points to node to be actually deleted
     }
-    else {                        // y == z
+    else 
+    {                        // y == z
       x_parent = y->parent;
       if (x) x->parent = y->parent;   
       if (root == z)
@@ -268,8 +278,10 @@ private:
         else                      // x == z->left
           rightmost = maximum(x);
     }
-    if (y->color != rb_tree_red) { 
+    if (y->color != rb_tree_red) 
+    { 
       while (x != root && (x == nullptr || x->color == rb_tree_black))
+      {
         if (x == x_parent->left) {
           node_ptr w = x_parent->right;
           if (w->color == rb_tree_red) {
@@ -296,21 +308,28 @@ private:
             rb_tree_rotate_left(x_parent, root);
             break;
           }
-        } else {                  // same as above, with right <-> left.
+        } 
+        else 
+        {                  // same as above, with right <-> left.
           node_ptr w = x_parent->left;
-          if (w->color == rb_tree_red) {
+          if (w->color == rb_tree_red) 
+          {
             w->color = rb_tree_black;
             x_parent->color = rb_tree_red;
             rb_tree_rotate_right(x_parent, root);
             w = x_parent->left;
           }
           if ((w->right == nullptr || w->right->color == rb_tree_black) &&
-              (w->left == nullptr || w->left->color == rb_tree_black)) {
+              (w->left == nullptr || w->left->color == rb_tree_black)) 
+          {
             w->color = rb_tree_red;
             x = x_parent;
             x_parent = x_parent->parent;
-          } else {
-            if (w->left == nullptr || w->left->color == rb_tree_black) {
+          } 
+          else 
+          {
+            if (w->left == nullptr || w->left->color == rb_tree_black) 
+            {
               if (w->right) w->right->color = rb_tree_black;
               w->color = rb_tree_red;
               rb_tree_rotate_left(w, root);
@@ -323,13 +342,11 @@ private:
             break;
           }
         }
+      }
       if (x) x->color = rb_tree_black;
     }
     return y;
   }
-
-private:
-  node_ptr header;
 };
 
 #endif 
