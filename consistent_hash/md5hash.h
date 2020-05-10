@@ -5,13 +5,13 @@
 
 class md5hash {
 public:
-  unsigned int get_key(std::string str)
+  unsigned int get_key(const std::string& str)
   {
-    const unsigned char *digest = MD5(str).getDigest(); //16位 16字节
+    const unsigned char* digest = MD5(str).getDigest(); //16位 16字节
     unsigned int hash = 0;
     /* 
-		 *	每四个字节构成一个32位整数
-		 *	将四个32位整数相加得到hash值
+		* 	每四个字节构成一个32位整数
+		* 	将四个32位整数相加得到hash值
 		*/
     for (int i = 0; i < 4; i++)
     {

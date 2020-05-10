@@ -7,7 +7,7 @@
 template <typename Node>
 class rb_tree_helper {
 public:
-  rb_tree_helper(Node *n) : root(n), prev(nullptr) {}
+  rb_tree_helper(Node* n) : root(n), prev(nullptr) {}
   void watch() { rb_tree_for_watch(root); }
   bool is_rb_tree()
   {
@@ -18,12 +18,12 @@ public:
   }
 
 private:
-  Node *root;
-  Node *prev;
+  Node* root;
+  Node* prev;
 
 private:
   struct backlog {
-    Node *node;
+    Node* node;
     int next_sub_idx;
   };
   enum
@@ -36,24 +36,24 @@ private:
     MaxLevel = 64
   };
   static inline void
-  nbl_push(backlog *nbl, backlog **top, backlog **bottom)
+  nbl_push(backlog* nbl, backlog** top, backlog** bottom)
   {
-    if (*top - *bottom < MaxLevel)
-      (*(*top)++) = *nbl;
+    if (*top -* bottom < MaxLevel)
+      (*(*top)++) =* nbl;
   }
-  static inline backlog *nbl_pop(backlog **top, backlog **bottom)
+  static inline backlog* nbl_pop(backlog** top, backlog** bottom)
   {
-    return *top > *bottom ? --*top : nullptr;
+    return* top >* bottom ? --*top : nullptr;
   }
-  static inline int nbl_is_empty(backlog *top, backlog *bottom)
+  static inline int nbl_is_empty(backlog* top, backlog* bottom)
   {
     return top == bottom;
   }
-  static inline bool is_leaf(Node *node)
+  static inline bool is_leaf(Node* node)
   {
     return node->left == nullptr && node->right == nullptr;
   }
-  static void node_print(Node *node)
+  static void node_print(Node* node)
   {
     if (node != nullptr)
     {
@@ -65,14 +65,14 @@ private:
     else
       printf("\n");
   }
-  static void rb_tree_for_watch(Node *root)
+  static void rb_tree_for_watch(Node* root)
   {
     int level = 0;
-    Node *node = root;
+    Node* node = root;
     int prev_sub_index;
     backlog nbl;
-    backlog *p_nbl = nullptr;
-    backlog *top, *bottom, nblStack[MaxLevel];
+    backlog* p_nbl = nullptr;
+    backlog* top,* bottom, nblStack[MaxLevel];
     top = bottom = nblStack;
 
     for (;;)
@@ -131,7 +131,7 @@ private:
       }
     }
   }
-  bool is_rb_tree(Node *node, int &black_count)
+  bool is_rb_tree(Node* node, int &black_count)
   {
     if (node == nullptr)
     {

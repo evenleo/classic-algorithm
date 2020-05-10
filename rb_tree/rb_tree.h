@@ -19,8 +19,8 @@ public:
     Node* left;
     Node* right;
     Node(Key k, Value v) 
-      : key(k), value(v), parent(nullptr), left(nullptr), right(nullptr)
-    {}
+      : key(k), value(v), parent(nullptr), 
+        left(nullptr), right(nullptr) {}
     Node() {}
   };
   typedef Node* node_ptr;
@@ -87,9 +87,9 @@ public:
   }
 
 private:
-  node_ptr& root() const { return header->parent; }
-  node_ptr& leftmost() const { return header->left; }
-  node_ptr& rightmost() const { return header->right; }
+  node_ptr& root() { return header->parent; }
+  node_ptr& leftmost() { return header->left; }
+  node_ptr& rightmost() { return header->right; }
   static node_ptr minimum(node_ptr x) 
   {
     while (x->left != nullptr) x = x->left;

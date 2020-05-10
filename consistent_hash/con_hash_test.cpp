@@ -13,14 +13,14 @@ int main(int argc, char **argv)
   conhash.add_node("10.0.1.57:8083", 3);
 
   conhash.helper();
-  conhash.visit_vnode();
+  conhash.visit();
 
   std::string server_name = conhash.get_server_name("127.0.0.1");
   cout << "server_name: " << server_name << std::endl;
   server_name = conhash.get_server_name("128.0.0.1");
   cout << "server_name: " << server_name << std::endl;
 
-  conhash.del_vnode("10.0.1.56:8082");
+  conhash.del_node("10.0.1.56:8082");
   server_name = conhash.get_server_name("128.0.0.1");
   cout << "server_name: " << server_name << std::endl;
 }
