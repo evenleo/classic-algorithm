@@ -143,7 +143,7 @@ private:
         } 
         else
         {
-          if (x = x->parent->right)
+          if (x == x->parent->right)
           {
             x = x->parent;
             rb_tree_rotate_left(x, root);

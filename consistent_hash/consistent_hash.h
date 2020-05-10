@@ -29,18 +29,13 @@ public:
   {
     vnode node(node_name, vnum);
     uint key = hash.get_key(node_name);
-    std::cout << "-------------------------------" << std::endl;
-    std::cout << "node_name: " << node_name << ", key: " << key << std::endl;
     vnode_tree.insert(key, node);
     for (int i = 0; i < vnum; ++i)
     {
       std::string key_str = node_name + "#" + std::to_string(i);
       key = hash.get_key(key_str);
-      std::cout << "node_name: " << key_str << ", key: " << key << std::endl;
-
       vnode_tree.insert(key, node);
     }
-    std::cout << "done node_name: " << node_name << std::endl;
     return true;
   }
   bool del_vnode(const std::string& node_name)

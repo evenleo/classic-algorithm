@@ -3,6 +3,8 @@ project(con_hash_test)
 
 set(CMAKE_CXX_STANDARD 17)
 
+SET(CMAKE_BUILD_TYPE "Debug")
+
 include_directories(../rb_tree)
 
 add_executable(con_hash_test con_hash_test.cpp md5.cpp)
