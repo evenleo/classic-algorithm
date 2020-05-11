@@ -15,9 +15,7 @@ public:
     std::string name;
     int vnum;
     vnode(const std::string &n, int v)
-        : name(n), vnum(v)
-    {
-    }
+        : name(n), vnum(v) {}
     vnode() {}
   };
 
