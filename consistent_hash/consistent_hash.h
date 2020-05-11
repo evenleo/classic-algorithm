@@ -6,15 +6,18 @@
 #include "rb_tree_helper.h"
 #include "md5hash.h"
 
-class consistent_hash {
+class consistent_hash
+{
 public:
   typedef int64_t uint;
   struct vnode
   {
     std::string name;
     int vnum;
-    vnode(const std::string& n, int v)
-        : name(n), vnum(v) {}
+    vnode(const std::string &n, int v)
+        : name(n), vnum(v)
+    {
+    }
     vnode() {}
   };
 
@@ -26,7 +29,7 @@ public:
   consistent_hash() {}
   ~consistent_hash() {}
 
-  void add_node(const std::string& node_name, int vnum)
+  void add_node(const std::string &node_name, int vnum)
   {
     vnode node(node_name, vnum);
     uint key = hash.get_key(node_name);
@@ -38,7 +41,7 @@ public:
       vnode_tree.insert(key, node);
     }
   }
-  void del_node(const std::string& node_name)
+  void del_node(const std::string &node_name)
   {
     uint key = hash.get_key(node_name);
     auto ptr = vnode_tree.find(key);
@@ -53,7 +56,7 @@ public:
     }
     vnode_tree.erase(key);
   }
-  std::string get_server_name(const std::string& name)
+  std::string get_server_name(const std::string &name)
   {
     uint key = hash.get_key(name);
     auto it = vnode_tree.lookup(key);
@@ -68,13 +71,13 @@ public:
   }
 
 private:
-  void visit(rb_tree<uint, vnode>::Node* node)
+  void visit(rb_tree<uint, vnode>::Node *node)
   {
     if (node == nullptr)
       return;
     visit(node->left);
-    std::cout << "key: " << node->key 
-      << ", vnode_name: " << node->value.name << std::endl;
+    std::cout << "key: " << node->key
+              << ", vnode_name: " << node->value.name << std::endl;
     visit(node->right);
   }
 };
