@@ -1,11 +1,11 @@
-#include <iostream>
-#include <cassert>
 #include "rb_tree.h"
 #include "rb_tree_helper.h"
+#include <cassert>
+#include <iostream>
 
 using namespace std;
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   rb_tree<int, int> rbt;
   for (int i = 0; i < 20; ++i)
@@ -17,7 +17,7 @@ int main(int argc, char **argv)
   pt.watch();
   assert(pt.is_rb_tree());
 
-  rb_tree<int, int>::Node *ptr = rbt.find(18);
+  rb_tree<int, int>::Node* ptr = rbt.find(18);
   if (ptr)
     cout << "key: " << ptr->key << ", value: " << ptr->value << endl;
   else
