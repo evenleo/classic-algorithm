@@ -6,7 +6,7 @@
 #include <initializer_list>
 #include <ctime>
 
-#define private public
+#define private public  // 万恶的宏定义，主要用于测试访问私有成员
 
 template <typename Key>
 class skiplist
@@ -17,7 +17,7 @@ private:
 public:
   struct Node
   {
-    Node(Key x) : key(x) {}
+    Node(Key k) : key(k) {}
     Key key;
     Node *next[1];  // C语言中的柔性数组技巧
   };
@@ -29,9 +29,9 @@ public:
   };
   skiplist(std::initializer_list<Key> init) : skiplist()
   {
-    for (const Key &x : init)
+    for (const Key &k : init)
     {
-      insert(x);
+      insert(k);
     }
   }
   ~skiplist()
@@ -45,11 +45,12 @@ public:
       delete del_node;
     }
   }
+  skiplist(const skiplist &) = delete;
   skiplist &operator=(const skiplist &) = delete;
   skiplist &operator=(skiplist &&) = delete;
 
 private:
-  Node *newNode(Key key, int level)
+  Node *newNode(const Key &key, int level)
   {
     void *node_memory = malloc(sizeof(Node) + sizeof(Node *) * (level - 1));
     return new (node_memory) Node(key);
