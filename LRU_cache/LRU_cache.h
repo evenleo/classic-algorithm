@@ -28,7 +28,6 @@ public:
       head = next;
     }
   }
-
   int get(int key)
   {
     auto it = hash_map.find(key);

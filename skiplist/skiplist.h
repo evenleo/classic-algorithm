@@ -6,178 +6,138 @@
 #include <initializer_list>
 #include <ctime>
 
-template <typename T>
+#define private public
+
+template <typename Key>
 class skiplist
 {
-public:
-  using value_type = T;
-  using size_type = int;
-
 private:
-  const static size_type MAX_LEVEL = 16;
+  enum { kMaxLevel = 12 };
 
 public:
-  struct node
+  struct Node
   {
-    node(value_type x, size_type l) : value(x), max_level(l) {}
-    value_type value;
-    node *forwards[MAX_LEVEL] = {nullptr};
-    size_type max_level;
+    Node(Key x) : key(x) {}
+    Key key;
+    Node *next[1];  // C语言中的柔性数组技巧
   };
-  using node_type = node;
 
 public:
-  skiplist() : levelCount(1)
+  skiplist() : max_level(1)
   {
-    listHead = new node_type(value_type(), 0);
+    head = newNode(0, kMaxLevel);
   };
-  skiplist(std::initializer_list<value_type> init) : skiplist()
+  skiplist(std::initializer_list<Key> init) : skiplist()
   {
-    for (const value_type &x : init)
+    for (const Key &x : init)
     {
       insert(x);
     }
   }
   ~skiplist()
   {
-    node_type *pNode = listHead;
-    node_type *tmp;
+    Node *pNode = head;
+    Node *del_node;
     while (nullptr != pNode)
-    { 
-      tmp = pNode;
-      pNode = pNode->forwards[0];
-      delete tmp;
+    {
+      del_node = pNode;
+      pNode = pNode->next[0];
+      delete del_node;
     }
   }
-  skiplist &operator=(const skiplist &other) = delete;
-  skiplist &operator=(skiplist &&other) = delete;
+  skiplist &operator=(const skiplist &) = delete;
+  skiplist &operator=(skiplist &&) = delete;
 
 private:
-  // size_type randomLevel() {
-  //     size_type level = 1;
-  //     for (size_type i=1; i < MAX_LEVEL; ++i) {
-  //         if (getRandom() % 3 == 1) {
-  //             level++;
-  //         }
-  //     }
-  //     return level;
-  // }
-  size_type randomLevel()
+  Node *newNode(Key key, int level)
   {
-    size_type level = 1;
-    while (rand() % 2 && level <= MAX_LEVEL)
+    void *node_memory = malloc(sizeof(Node) + sizeof(Node *) * (level - 1));
+    return new (node_memory) Node(key);
+  }
+  int randomLevel()
+  {
+    int level = 1;
+    while (rand() % 2 && level <= kMaxLevel)
       level++;
     return level;
   }
-  size_type getRandom()
+  int getRandom()
   {
-    static size_type count = 1;
+    static int count = 1;
     std::default_random_engine generator(time(0) + count);
-    std::uniform_int_distribution<size_type> distribution(1, 99999);
+    std::uniform_int_distribution<int> distribution(1, 99999);
     count += 100;
     return distribution(generator);
   }
 
 public:
-  node_type *find(const value_type &x)
+  Node *find(const Key &key)
   {
-    node_type *pNode = listHead;
-    for (int i = levelCount - 1; i >= 0; --i)
+    Node *pNode = head;
+    for (int i = max_level - 1; i >= 0; --i)
     {
-      while (nullptr != pNode->forwards[i] && pNode->forwards[i]->value < x)
+      while (nullptr != pNode->next[i] && pNode->next[i]->key < key)
       {
-        pNode = pNode->forwards[i];
+        pNode = pNode->next[i];
       }
     }
-    if (nullptr != pNode->forwards[0] && pNode->forwards[0]->value == x)
-      return pNode->forwards[0];
+    if (nullptr != pNode->next[0] && pNode->next[0]->key == key)
+      return pNode->next[0];
     return nullptr;
   }
-  void insert(const value_type &x)
+  void insert(const Key &key)
   {
-    size_type level = randomLevel();
-    node_type *newNode = new node_type(x, level);
-    node_type *update[level];
-    for (size_type i = 0; i < level; ++i)
+    int level = randomLevel();
+    Node *new_node = newNode(key, level);
+    Node *prev[kMaxLevel];
+    Node *pNode = head;
+    for (int i = level - 1; i >= 0; --i)
     {
-      update[i] = listHead;
-    }
-    node_type *pNode = listHead;
-    for (size_type i = level - 1; i >= 0; --i)
-    {
-      while ((nullptr != pNode->forwards[i]) && (pNode->forwards[i]->value < x))
+      while ((nullptr != pNode->next[i]) && (pNode->next[i]->key < key))
       {
-        pNode = pNode->forwards[i];
+        pNode = pNode->next[i];
       }
-      update[i] = pNode;
+      prev[i] = pNode;
     }
-    for (size_type i = 0; i < level; ++i)
+    for (int i = 0; i < level; ++i)
     {
-      newNode->forwards[i] = update[i]->forwards[i];
-      update[i]->forwards[i] = newNode;
+      new_node->next[i] = prev[i]->next[i];
+      prev[i]->next[i] = new_node;
     }
 
-    if (levelCount < level)
-      levelCount = level;
+    if (max_level < level)
+      max_level = level;
   }
-  void erase(const value_type &x)
+  void erase(const Key &key)
   {
-    node_type *update[levelCount];
-    node_type *pNode = listHead;
-    for (size_type i = levelCount - 1; i >= 0; --i)
+    Node *prev[max_level];
+    Node *pNode = head;
+    for (int i = max_level - 1; i >= 0; --i)
     {
-      while (nullptr != pNode->forwards[i] && pNode->forwards[i]->value < x)
+      while (nullptr != pNode->next[i] && pNode->next[i]->key < key)
       {
-        pNode = pNode->forwards[i];
+        pNode = pNode->next[i];
       }
-      update[i] = pNode;
+      prev[i] = pNode;
     }
-    if (nullptr != pNode->forwards[0] && pNode->forwards[0]->value == x)
+    if (nullptr != pNode->next[0] && pNode->next[0]->key == key)
     {
-      for (size_type i = levelCount - 1; i >= 0; --i)
+      for (int i = max_level - 1; i >= 0; --i)
       {
-        if (nullptr != update[i]->forwards[i] && x == update[i]->forwards[i]->value)
-          update[i]->forwards[i] = update[i]->forwards[i]->forwards[i];
+        if (nullptr != prev[i]->next[i] && key == prev[i]->next[i]->key)
+          prev[i]->next[i] = prev[i]->next[i]->next[i];
       }
-      delete pNode->forwards[0];
+      delete pNode->next[0];
     }
-    while (levelCount > 1 && listHead->forwards[levelCount] == nullptr)
+    while (max_level > 1 && head->next[max_level] == nullptr)
     {
-      levelCount--;
-    }
-  }
-  void printAll()
-  {
-    node_type *pNode = listHead;
-    while (nullptr != pNode->forwards[0])
-    {
-      std::cout << pNode->forwards[0]->value << " ";
-      pNode = pNode->forwards[0];
-    }
-  }
-  void printAll(size_type l)
-  {
-    for (size_type i = levelCount - 1; i >= 0; --i)
-    {
-      node_type *pNode = listHead;
-      std::cout << "level: " << i << std::endl;
-      if (l < 0 || (l >= 0 && l == i))
-      {
-        while (nullptr != pNode->forwards[i])
-        {
-          std::cout << pNode->forwards[i]->value << " ";
-          pNode = pNode->forwards[i];
-        }
-        std::cout << std::endl;
-        if (l >= 0)
-          break;
-      }
+      max_level--;
     }
   }
 
 private:
-  size_type levelCount;
-  node_type *listHead;
+  int max_level;
+  Node *head;
 };
 
 #endif
