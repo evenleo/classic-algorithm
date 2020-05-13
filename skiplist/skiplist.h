@@ -1,16 +1,15 @@
 #ifndef SKIPLIST_H
 #define SKIPLIST_H
 
+#include <ctime>
+#include <initializer_list>
 #include <iostream>
 #include <random>
-#include <initializer_list>
-#include <ctime>
 
 #define private public  // 万恶的宏定义，主要用于测试访问私有成员
 
 template <typename Key>
-class skiplist
-{
+class skiplist {
 private:
   enum { kMaxLevel = 12 };
 
@@ -19,7 +18,7 @@ public:
   {
     Node(Key k) : key(k) {}
     Key key;
-    Node *next[1];  // C语言中的柔性数组技巧
+    Node* next[1];  // C语言中的柔性数组技巧
   };
 
 public:
@@ -29,15 +28,15 @@ public:
   };
   skiplist(std::initializer_list<Key> init) : skiplist()
   {
-    for (const Key &k : init)
+    for (const Key& k : init)
     {
       insert(k);
     }
   }
   ~skiplist()
   {
-    Node *pNode = head;
-    Node *del_node;
+    Node* pNode = head;
+    Node* del_node;
     while (nullptr != pNode)
     {
       del_node = pNode;
@@ -45,14 +44,14 @@ public:
       delete del_node;
     }
   }
-  skiplist(const skiplist &) = delete;
-  skiplist &operator=(const skiplist &) = delete;
-  skiplist &operator=(skiplist &&) = delete;
+  skiplist(const skiplist&) = delete;
+  skiplist& operator=(const skiplist&) = delete;
+  skiplist& operator=(skiplist&&) = delete;
 
 private:
-  Node *newNode(const Key &key, int level)
+  Node* newNode(const Key& key, int level)
   {
-    void *node_memory = malloc(sizeof(Node) + sizeof(Node *) * (level - 1));
+    void* node_memory = malloc(sizeof(Node) + sizeof(Node*) * (level - 1));
     return new (node_memory) Node(key);
   }
   int randomLevel()
@@ -72,9 +71,9 @@ private:
   }
 
 public:
-  Node *find(const Key &key)
+  Node* find(const Key& key)
   {
-    Node *pNode = head;
+    Node* pNode = head;
     for (int i = max_level - 1; i >= 0; --i)
     {
       while (nullptr != pNode->next[i] && pNode->next[i]->key < key)
@@ -86,12 +85,12 @@ public:
       return pNode->next[0];
     return nullptr;
   }
-  void insert(const Key &key)
+  void insert(const Key& key)
   {
     int level = randomLevel();
-    Node *new_node = newNode(key, level);
-    Node *prev[kMaxLevel];
-    Node *pNode = head;
+    Node* new_node = newNode(key, level);
+    Node* prev[kMaxLevel];
+    Node* pNode = head;
     for (int i = level - 1; i >= 0; --i)
     {
       while ((nullptr != pNode->next[i]) && (pNode->next[i]->key < key))
@@ -109,10 +108,10 @@ public:
     if (max_level < level)
       max_level = level;
   }
-  void erase(const Key &key)
+  void erase(const Key& key)
   {
-    Node *prev[max_level];
-    Node *pNode = head;
+    Node* prev[max_level];
+    Node* pNode = head;
     for (int i = max_level - 1; i >= 0; --i)
     {
       while (nullptr != pNode->next[i] && pNode->next[i]->key < key)
@@ -138,7 +137,7 @@ public:
 
 private:
   int max_level;
-  Node *head;
+  Node* head;
 };
 
 #endif
