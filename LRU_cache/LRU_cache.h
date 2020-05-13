@@ -3,22 +3,18 @@
 
 #include <unordered_map>
 
-class LRU_cache
-{
+class LRU_cache {
 public:
-  struct Node
-  {
+  struct Node {
     int key;
     int value;
-    Node *prev;
-    Node *next;
-    Node(int k, int v)
-        : key(k), value(v), prev(nullptr), next(nullptr) {}
+    Node* prev;
+    Node* next;
+    Node(int k, int v) : key(k), value(v), prev(nullptr), next(nullptr) {}
   };
-  typedef Node *node_ptr;
+  typedef Node* node_ptr;
 
-  LRU_cache(int cap)
-      : capacity(cap), head(nullptr), tail(nullptr) {}
+  LRU_cache(int cap) : capacity(cap), head(nullptr), tail(nullptr) {}
   ~LRU_cache()
   {
     while (head != nullptr)
@@ -31,10 +27,7 @@ public:
   int get(int key)
   {
     auto it = hash_map.find(key);
-    if (it == hash_map.end())
-    {
-      return -1;
-    }
+    if (it == hash_map.end()) { return -1; }
     else
     {
       node_ptr node = hash_map.at(key);
@@ -86,10 +79,7 @@ public:
   }
   void remove(node_ptr node)
   {
-    if (head == tail)
-    {
-      head = tail = nullptr;
-    }
+    if (head == tail) { head = tail = nullptr; }
     else if (head == node)
     {
       head = node->next;
@@ -105,7 +95,7 @@ public:
       node->prev->next = node->next;
       node->next->prev = node->prev;
     }
-    
+
     node->next = nullptr;
     node->prev = nullptr;
   }
