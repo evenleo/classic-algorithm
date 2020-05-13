@@ -1,30 +1,32 @@
 #ifndef RB_TREE_H
 #define RB_TREE_H
 
-#define private                                                                \
-public  // 万恶的宏伎俩啊，因为测试用了私有的函数，这里需要破坏了封装
+#define private \
+public // 万恶的宏伎俩啊，因为测试用了私有的函数，这里需要破坏了封装
 
-typedef bool     color_type;
+typedef bool color_type;
 const color_type rb_tree_red = false;
 const color_type rb_tree_black = true;
 
-template <typename Key, typename Value> class rb_tree {
+template <typename Key, typename Value>
+class rb_tree
+{
 public:
   struct Node
   {
-    Key        key;
-    Value      value;
+    Key key;
+    Value value;
     color_type color;
-    Node*      parent;
-    Node*      left;
-    Node*      right;
+    Node *parent;
+    Node *left;
+    Node *right;
     Node(Key k, Value v)
         : key(k), value(v), parent(nullptr), left(nullptr), right(nullptr)
     {
     }
     Node() {}
   };
-  typedef Node* node_ptr;
+  typedef Node *node_ptr;
 
 private:
   node_ptr header;
@@ -92,15 +94,15 @@ public:
   }
 
 private:
-  node_ptr& root()
+  node_ptr &root()
   {
     return header->parent;
   }
-  node_ptr& leftmost()
+  node_ptr &leftmost()
   {
     return header->left;
   }
-  node_ptr& rightmost()
+  node_ptr &rightmost()
   {
     return header->right;
   }
@@ -158,7 +160,7 @@ private:
     rb_tree_rebalance(z, header->parent);
     return z;
   }
-  inline void rb_tree_rebalance(node_ptr x, node_ptr& root)
+  inline void rb_tree_rebalance(node_ptr x, node_ptr &root)
   {
     x->color = rb_tree_red;
     while (x != root && x->parent->color == rb_tree_red)
@@ -210,7 +212,7 @@ private:
     }
     root->color = rb_tree_black;
   }
-  inline void rb_tree_rotate_left(node_ptr x, node_ptr& root)
+  inline void rb_tree_rotate_left(node_ptr x, node_ptr &root)
   {
     node_ptr y = x->right;
     x->right = y->left;            /*      p                      p   */
@@ -226,7 +228,7 @@ private:
     y->left = x;
     x->parent = y;
   }
-  inline void rb_tree_rotate_right(node_ptr x, node_ptr& root)
+  inline void rb_tree_rotate_right(node_ptr x, node_ptr &root)
   {
     node_ptr y = x->left;
     x->left = y->right;            /*    p                     p       */
@@ -242,27 +244,27 @@ private:
     y->right = x;
     x->parent = y;
   }
-  inline node_ptr rb_tree_rebalance_for_erase(node_ptr  z,
-                                              node_ptr& root,
-                                              node_ptr& leftmost,
-                                              node_ptr& rightmost)
+  inline node_ptr rb_tree_rebalance_for_erase(node_ptr z,
+                                              node_ptr &root,
+                                              node_ptr &leftmost,
+                                              node_ptr &rightmost)
   {
     node_ptr y = z;
     node_ptr x = nullptr;
     node_ptr x_parent = nullptr;
-    if (y->left == nullptr)        // z has at most one non-null child. y == z.
-      x = y->right;                // x might be null.
-    else if (y->right == nullptr)  // z has exactly one non-null child.  y == z.
-      x = y->left;                 // x is not null.
+    if (y->left == nullptr)       // z has at most one non-null child. y == z.
+      x = y->right;               // x might be null.
+    else if (y->right == nullptr) // z has exactly one non-null child.  y == z.
+      x = y->left;                // x is not null.
     else
-    {                // z has two non-null children.  Set y to
-      y = y->right;  //   z's successor.  x might be null.
+    {               // z has two non-null children.  Set y to
+      y = y->right; //   z's successor.  x might be null.
       while (y->left != nullptr)
         y = y->left;
       x = y->right;
     }
     if (y != z)
-    {  // relink y in place of z.  y is z's successor
+    { // relink y in place of z.  y is z's successor
       z->left->parent = y;
       y->left = z->left;
       if (y != z->right)
@@ -270,7 +272,7 @@ private:
         x_parent = y->parent;
         if (x)
           x->parent = y->parent;
-        y->parent->left = x;  // y must be a left child
+        y->parent->left = x; // y must be a left child
         y->right = z->right;
         z->right->parent = y;
       }
@@ -288,7 +290,7 @@ private:
       // y now points to node to be actually deleted
     }
     else
-    {  // y == z
+    { // y == z
       x_parent = y->parent;
       if (x)
         x->parent = y->parent;
@@ -299,16 +301,16 @@ private:
       else
         z->parent->right = x;
       if (leftmost == z)
-        if (z->right == nullptr)  // z->left must be null also
+        if (z->right == nullptr) // z->left must be null also
           leftmost = z->parent;
         // makes leftmost == header if z == root
         else
           leftmost = minimum(x);
       if (rightmost == z)
-        if (z->left == nullptr)  // z->right must be null also
+        if (z->left == nullptr) // z->right must be null also
           rightmost = z->parent;
         // makes rightmost == header if z == root
-        else  // x == z->left
+        else // x == z->left
           rightmost = maximum(x);
     }
     if (y->color != rb_tree_red)
@@ -351,7 +353,7 @@ private:
           }
         }
         else
-        {  // same as above, with right <-> left.
+        { // same as above, with right <-> left.
           node_ptr w = x_parent->left;
           if (w->color == rb_tree_red)
           {

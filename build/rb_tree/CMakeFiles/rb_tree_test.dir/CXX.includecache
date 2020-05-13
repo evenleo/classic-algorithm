@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/even/workspace/classic-algorithm/rb_tree/rb_tree.h
+
+/home/even/workspace/classic-algorithm/rb_tree/rb_tree_helper.h
+rb_tree.h
+/home/even/workspace/classic-algorithm/rb_tree/rb_tree.h
+stdio.h
+-
+
+/home/even/workspace/classic-algorithm/rb_tree/rb_tree_test.cpp
+rb_tree.h
+/home/even/workspace/classic-algorithm/rb_tree/rb_tree.h
+rb_tree_helper.h
+/home/even/workspace/classic-algorithm/rb_tree/rb_tree_helper.h
+cassert
+-
+iostream
+-
+

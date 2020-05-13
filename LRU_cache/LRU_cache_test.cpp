@@ -7,7 +7,8 @@ using namespace std;
 int main(int argc, char** argv)
 {
   LRU_cache lru(10);
-  for (int i = 1; i <= 10; ++i) {
+  for (int i = 1; i <= 10; ++i)
+  {
     lru.put(i, i + 100);
   }
   lru.put(11, 111);
