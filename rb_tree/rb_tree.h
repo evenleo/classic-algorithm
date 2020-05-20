@@ -1,6 +1,8 @@
 #ifndef RB_TREE_H
 #define RB_TREE_H
 
+#include <algorithm>
+
 #define private \
 public // 万恶的宏伎俩啊，因为测试用了私有的函数，这里需要破坏了封装
 
