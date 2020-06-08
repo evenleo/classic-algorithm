@@ -5,7 +5,8 @@
 
 class LRU_cache {
 public:
-  struct Node {
+  struct Node
+  {
     int key;
     int value;
     Node* prev;
@@ -27,7 +28,10 @@ public:
   int get(int key)
   {
     auto it = hash_map.find(key);
-    if (it == hash_map.end()) { return -1; }
+    if (it == hash_map.end())
+    {
+      return -1;
+    }
     else
     {
       node_ptr node = hash_map.at(key);
@@ -79,7 +83,10 @@ public:
   }
   void remove(node_ptr node)
   {
-    if (head == tail) { head = tail = nullptr; }
+    if (head == tail)
+    {
+      head = tail = nullptr;
+    }
     else if (head == node)
     {
       head = node->next;

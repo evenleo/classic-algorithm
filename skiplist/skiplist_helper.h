@@ -4,18 +4,17 @@
 #include "skiplist.h"
 
 template <typename Node>
-class skiplist_helper
-{
+class skiplist_helper {
 private:
-  Node *head;
+  Node* head;
   int max_level;
 
 public:
-  skiplist_helper(Node *h, int l) : head(h), max_level(l) {}
+  skiplist_helper(Node* h, int l) : head(h), max_level(l) {}
 
   void printAll()
   {
-    Node *pNode = head;
+    Node* pNode = head;
     while (nullptr != pNode->next[0])
     {
       std::cout << pNode->next[0]->key << " ";
@@ -26,7 +25,7 @@ public:
   {
     for (int i = max_level - 1; i >= 0; --i)
     {
-      Node *pNode = head;
+      Node* pNode = head;
       std::cout << "level: " << i << std::endl;
       if (level < 0 || (level >= 0 && level == i))
       {

@@ -4,7 +4,8 @@
 #include "rb_tree.h"
 #include <stdio.h>
 
-template <typename Node> class rb_tree_helper {
+template <typename Node>
+class rb_tree_helper {
 public:
   rb_tree_helper(Node* n) : root(n), prev(nullptr) {}
   void watch()
@@ -27,7 +28,7 @@ private:
   struct backlog
   {
     Node* node;
-    int   next_sub_idx;
+    int next_sub_idx;
   };
   enum { LeftIndex, RightIndex };
   enum { MaxLevel = 64 };
@@ -62,10 +63,10 @@ private:
   }
   static void rb_tree_for_watch(Node* root)
   {
-    int      level = 0;
-    Node*    node = root;
-    int      prev_sub_index;
-    backlog  nbl;
+    int level = 0;
+    Node* node = root;
+    int prev_sub_index;
+    backlog nbl;
     backlog* p_nbl = nullptr;
     backlog *top, *bottom, nblStack[MaxLevel];
     top = bottom = nblStack;

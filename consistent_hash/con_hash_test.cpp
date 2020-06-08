@@ -1,10 +1,10 @@
-#include <iostream>
-#include <cassert>
 #include "consistent_hash.h"
+#include <cassert>
+#include <iostream>
 
 using namespace std;
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   consistent_hash conhash;
   conhash.add_node("192.168.0.1:8080", 2);

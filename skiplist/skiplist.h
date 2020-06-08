@@ -1,5 +1,5 @@
-#ifndef SKIPLIST_H
-#define SKIPLIST_H
+#ifndef Skiplist_H
+#define Skiplist_H
 
 #include <ctime>
 #include <initializer_list>
@@ -9,31 +9,33 @@
 #define private public  // 万恶的宏定义，主要用于测试访问私有成员
 
 template <typename Key>
-class skiplist {
-private:
-  enum { kMaxLevel = 12 };
-
+class Skiplist {
 public:
-  struct Node
-  {
+  struct Node {
     Node(Key k) : key(k) {}
     Key key;
     Node* next[1];  // C语言中的柔性数组技巧
   };
 
+private:
+  int max_level;
+  Node* head;
+
+  enum { kMaxLevel = 12 };
+
 public:
-  skiplist() : max_level(1)
+  Skiplist() : max_level(1)
   {
     head = newNode(0, kMaxLevel);
   };
-  skiplist(std::initializer_list<Key> init) : skiplist()
+  Skiplist(std::initializer_list<Key> init) : Skiplist()
   {
     for (const Key& k : init)
     {
       insert(k);
     }
   }
-  ~skiplist()
+  ~Skiplist()
   {
     Node* pNode = head;
     Node* del_node;
@@ -44,9 +46,9 @@ public:
       delete del_node;
     }
   }
-  skiplist(const skiplist&) = delete;
-  skiplist& operator=(const skiplist&) = delete;
-  skiplist& operator=(skiplist&&) = delete;
+  Skiplist(const Skiplist&) = delete;
+  Skiplist& operator=(const Skiplist&) = delete;
+  Skiplist& operator=(Skiplist&&) = delete;
 
 private:
   Node* newNode(const Key& key, int level)
@@ -54,20 +56,12 @@ private:
     void* node_memory = malloc(sizeof(Node) + sizeof(Node*) * (level - 1));
     return new (node_memory) Node(key);
   }
-  int randomLevel()
+  static int randomLevel()
   {
     int level = 1;
     while (rand() % 2 && level <= kMaxLevel)
       level++;
     return level;
-  }
-  int getRandom()
-  {
-    static int count = 1;
-    std::default_random_engine generator(time(0) + count);
-    std::uniform_int_distribution<int> distribution(1, 99999);
-    count += 100;
-    return distribution(generator);
   }
 
 public:
@@ -115,9 +109,7 @@ public:
     for (int i = max_level - 1; i >= 0; --i)
     {
       while (nullptr != pNode->next[i] && pNode->next[i]->key < key)
-      {
         pNode = pNode->next[i];
-      }
       prev[i] = pNode;
     }
     if (nullptr != pNode->next[0] && pNode->next[0]->key == key)
@@ -134,10 +126,6 @@ public:
       max_level--;
     }
   }
-
-private:
-  int max_level;
-  Node* head;
 };
 
 #endif
