@@ -1,5 +1,5 @@
-#ifndef Skiplist_H
-#define Skiplist_H
+#ifndef SKIPLIST_H
+#define SKIPLIST_H
 
 #include <ctime>
 #include <initializer_list>
