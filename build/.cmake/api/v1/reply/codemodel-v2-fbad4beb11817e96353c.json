@@ -1,0 +1,225 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "rb_tree",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "rb_tree",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "consistent_hash",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "consistent_hash",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "LRU_cache",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "LRU_cache",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "skiplist",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "skiplist",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "b-tree",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 5,
+					"source" : "b-tree",
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3,
+						4,
+						5
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "classic-algorithm"
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "rb_tree_test",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "con_hash_test",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "LRU_cache_test",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "skiplist_test",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						5
+					],
+					"name" : "btree_test",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 3,
+					"id" : "LRU_cache_test::@89c51acf5d01a58bf75c",
+					"jsonFile" : "target-LRU_cache_test-Debug-1113678843e612f1e454.json",
+					"name" : "LRU_cache_test",
+					"projectIndex" : 3
+				},
+				{
+					"directoryIndex" : 5,
+					"id" : "btree_test::@f628d899a86017748b3a",
+					"jsonFile" : "target-btree_test-Debug-fb629e793ee3acf9a7dd.json",
+					"name" : "btree_test",
+					"projectIndex" : 5
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "con_hash_test::@bb27c0147ce010de20e7",
+					"jsonFile" : "target-con_hash_test-Debug-6082422bd1dbb30f1019.json",
+					"name" : "con_hash_test",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "rb_tree_test::@06df37bfe6c8eebb8c34",
+					"jsonFile" : "target-rb_tree_test-Debug-c27d41528eb708b98122.json",
+					"name" : "rb_tree_test",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "skiplist_test::@36f88413243c9b6dded2",
+					"jsonFile" : "target-skiplist_test-Debug-ce5448884ecdb98bf148.json",
+					"name" : "skiplist_test",
+					"projectIndex" : 4
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/even/workspace/classic-algorithm/build",
+		"source" : "/home/even/workspace/classic-algorithm"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 0
+	}
+}
