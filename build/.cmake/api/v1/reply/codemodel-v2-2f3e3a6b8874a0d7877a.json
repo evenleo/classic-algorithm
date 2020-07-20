@@ -92,7 +92,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "",
 			"projects" : 
 			[
 				{
@@ -176,35 +176,35 @@
 				{
 					"directoryIndex" : 3,
 					"id" : "LRU_cache_test::@89c51acf5d01a58bf75c",
-					"jsonFile" : "target-LRU_cache_test-Debug-1113678843e612f1e454.json",
+					"jsonFile" : "target-LRU_cache_test-6b21446e4c1f05ceec90.json",
 					"name" : "LRU_cache_test",
 					"projectIndex" : 3
 				},
 				{
 					"directoryIndex" : 5,
 					"id" : "btree_test::@f628d899a86017748b3a",
-					"jsonFile" : "target-btree_test-Debug-fb629e793ee3acf9a7dd.json",
+					"jsonFile" : "target-btree_test-4c177ba7bae3ba9e05e8.json",
 					"name" : "btree_test",
 					"projectIndex" : 5
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "con_hash_test::@bb27c0147ce010de20e7",
-					"jsonFile" : "target-con_hash_test-Debug-6082422bd1dbb30f1019.json",
+					"jsonFile" : "target-con_hash_test-f715f9e70ff572af56e5.json",
 					"name" : "con_hash_test",
 					"projectIndex" : 2
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "rb_tree_test::@06df37bfe6c8eebb8c34",
-					"jsonFile" : "target-rb_tree_test-Debug-c27d41528eb708b98122.json",
+					"jsonFile" : "target-rb_tree_test-136682f2fdd5a9a3541a.json",
 					"name" : "rb_tree_test",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 4,
 					"id" : "skiplist_test::@36f88413243c9b6dded2",
-					"jsonFile" : "target-skiplist_test-Debug-ce5448884ecdb98bf148.json",
+					"jsonFile" : "target-skiplist_test-4e9fbf7a0ada97e1a6ce.json",
 					"name" : "skiplist_test",
 					"projectIndex" : 4
 				}

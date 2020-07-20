@@ -18,13 +18,13 @@ public:
   };
 
 private:
-  int max_level;
+  int maxLevel;
   Node* head;
 
   enum { kMaxLevel = 12 };
 
 public:
-  Skiplist() : max_level(1)
+  Skiplist() : maxLevel(1)
   {
     head = newNode(0, kMaxLevel);
   }
@@ -40,12 +40,12 @@ public:
   ~Skiplist()
   {
     Node* pNode = head;
-    Node* del_node;
+    Node* delNode;
     while (nullptr != pNode)
     {
-      del_node = pNode;
+      delNode = pNode;
       pNode = pNode->next[0];
-      delete del_node;
+      free(delNode);  // 对应malloc
     }
   }
 
@@ -63,9 +63,12 @@ private:
     * 为什么是level-1而不是level，因为sizeof(Node)已包含一个Node*指针的空间
     */ 
     void* node_memory = malloc(sizeof(Node) + sizeof(Node*) * (level - 1));
-    return new (node_memory) Node(key);
-  }
+    Node* node = new (node_memory) Node(key);
+    for (int i = 0; i < level; ++i)
+      node->next[i] = nullptr;
 
+    return node;
+  }
   /*
   * 随机函数，范围[1, kMaxLevel]，越小概率越大
   */ 
@@ -83,9 +86,9 @@ public:
   {
     // 从最高层开始查找，每层查找最后一个小于key的前继节点，不断缩小范围
     Node* pNode = head;
-    for (int i = max_level - 1; i >= 0; --i)
+    for (int i = maxLevel - 1; i >= 0; --i)
     {
-      while (nullptr != pNode->next[i] && pNode->next[i]->key < key)
+      while (pNode->next[i] != nullptr && pNode->next[i]->key < key)
       {
         pNode = pNode->next[i];
       }
@@ -107,7 +110,7 @@ public:
     // 从最高层开始查找，每层查找最后一个小于key的前继节点
     for (int i = level - 1; i >= 0; --i)
     {
-      while ((nullptr != pNode->next[i]) && (pNode->next[i]->key < key))
+      while (pNode->next[i] != nullptr && pNode->next[i]->key < key)
       {
         pNode = pNode->next[i];
       }
@@ -120,38 +123,39 @@ public:
       prev[i]->next[i] = new_node;
     }
 
-    if (max_level < level)  // 层数大于最大层数，更新最大层数
-      max_level = level;
+    if (maxLevel < level)  // 层数大于最大层数，更新最大层数
+      maxLevel = level;
   }
 
   void erase(const Key& key)
   {
-    Node* prev[max_level];
+    Node* prev[maxLevel];
     Node* pNode = head;
     // 从最高层开始查找，每层查找最后一个小于key的前继节点
-    for (int i = max_level - 1; i >= 0; --i)
+    for (int i = maxLevel - 1; i >= 0; --i)
     {
-      while (nullptr != pNode->next[i] && pNode->next[i]->key < key)
+      while (pNode->next[i] != nullptr && pNode->next[i]->key < key)
         pNode = pNode->next[i];
       prev[i] = pNode;
     }
     
     // 如果找到key，
-    if (nullptr != pNode->next[0] && pNode->next[0]->key == key)
+    if (pNode->next[0] != nullptr && pNode->next[0]->key == key)
     {
+      Node *delNode = pNode->next[0];
       // 从最高层开始，如果当前层的next节点的值等于key，则删除next节点
-      for (int i = max_level - 1; i >= 0; --i)
+      for (int i = maxLevel - 1; i >= 0; --i)
       {
-        if (nullptr != prev[i]->next[i] && key == prev[i]->next[i]->key)
+        if (prev[i]->next[i] != nullptr && key == prev[i]->next[i]->key)
           prev[i]->next[i] = prev[i]->next[i]->next[i];
       }
-      delete pNode->next[0];  // 最后销毁pNode->next[0]节点
+      free(delNode);  // 最后销毁pNode->next[0]节点
     }
     
     // 如果max_level>1且头结点的next指针为空，则该层已无数据，max_level减一
-    while (max_level > 1 && head->next[max_level] == nullptr)
+    while (maxLevel > 1 && head->next[maxLevel] == nullptr)
     {
-      max_level--;
+      maxLevel--;
     }
   }
 };

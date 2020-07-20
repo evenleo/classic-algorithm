@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "b-tree/btree_test"
+			"path" : "LRU_cache/LRU_cache_test"
 		}
 	],
 	"backtrace" : 1,
@@ -14,7 +14,7 @@
 		],
 		"files" : 
 		[
-			"b-tree/CMakeLists.txt"
+			"LRU_cache/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -35,7 +35,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g  "
+					"fragment" : " "
 				},
 				{
 					"fragment" : "-std=gnu++17"
@@ -48,15 +48,11 @@
 			]
 		}
 	],
-	"id" : "btree_test::@f628d899a86017748b3a",
+	"id" : "LRU_cache_test::@89c51acf5d01a58bf75c",
 	"link" : 
 	{
 		"commandFragments" : 
 		[
-			{
-				"fragment" : "-g",
-				"role" : "flags"
-			},
 			{
 				"fragment" : "",
 				"role" : "flags"
@@ -64,12 +60,12 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "btree_test",
-	"nameOnDisk" : "btree_test",
+	"name" : "LRU_cache_test",
+	"nameOnDisk" : "LRU_cache_test",
 	"paths" : 
 	{
-		"build" : "b-tree",
-		"source" : "b-tree"
+		"build" : "LRU_cache",
+		"source" : "LRU_cache"
 	},
 	"sourceGroups" : 
 	[
@@ -86,7 +82,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "b-tree/btree_test.cpp",
+			"path" : "LRU_cache/LRU_cache_test.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],
