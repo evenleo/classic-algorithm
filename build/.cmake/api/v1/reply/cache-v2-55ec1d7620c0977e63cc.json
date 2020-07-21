@@ -759,7 +759,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "6"
+			"value" : "7"
 		},
 		{
 			"name" : "CMAKE_OBJCOPY",
@@ -1122,30 +1122,6 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "LRU_cache_test_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/home/even/workspace/classic-algorithm/build/LRU_cache"
-		},
-		{
-			"name" : "LRU_cache_test_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/home/even/workspace/classic-algorithm/LRU_cache"
-		},
-		{
 			"name" : "btree_test_BINARY_DIR",
 			"properties" : 
 			[
@@ -1216,6 +1192,54 @@
 			],
 			"type" : "STATIC",
 			"value" : "/home/even/workspace/classic-algorithm/consistent_hash"
+		},
+		{
+			"name" : "kmp_test_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/even/workspace/classic-algorithm/build/kmp"
+		},
+		{
+			"name" : "kmp_test_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/even/workspace/classic-algorithm/kmp"
+		},
+		{
+			"name" : "lru_cache_test_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/even/workspace/classic-algorithm/build/lru_cache"
+		},
+		{
+			"name" : "lru_cache_test_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/even/workspace/classic-algorithm/lru_cache"
 		},
 		{
 			"name" : "rb_tree_test_BINARY_DIR",

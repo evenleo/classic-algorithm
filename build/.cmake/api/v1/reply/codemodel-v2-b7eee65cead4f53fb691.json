@@ -12,7 +12,8 @@
 						2,
 						3,
 						4,
-						5
+						5,
+						6
 					],
 					"minimumCMakeVersion" : 
 					{
@@ -32,7 +33,7 @@
 					"source" : "rb_tree",
 					"targetIndexes" : 
 					[
-						3
+						4
 					]
 				},
 				{
@@ -46,21 +47,21 @@
 					"source" : "consistent_hash",
 					"targetIndexes" : 
 					[
-						2
+						1
 					]
 				},
 				{
-					"build" : "LRU_cache",
+					"build" : "lru_cache",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.13"
 					},
 					"parentIndex" : 0,
 					"projectIndex" : 3,
-					"source" : "LRU_cache",
+					"source" : "lru_cache",
 					"targetIndexes" : 
 					[
-						0
+						3
 					]
 				},
 				{
@@ -74,7 +75,7 @@
 					"source" : "skiplist",
 					"targetIndexes" : 
 					[
-						4
+						5
 					]
 				},
 				{
@@ -88,7 +89,21 @@
 					"source" : "b-tree",
 					"targetIndexes" : 
 					[
-						1
+						0
+					]
+				},
+				{
+					"build" : "kmp",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 6,
+					"source" : "kmp",
+					"targetIndexes" : 
+					[
+						2
 					]
 				}
 			],
@@ -102,7 +117,8 @@
 						2,
 						3,
 						4,
-						5
+						5,
+						6
 					],
 					"directoryIndexes" : 
 					[
@@ -119,7 +135,7 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						3
+						4
 					]
 				},
 				{
@@ -131,7 +147,7 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						2
+						1
 					]
 				},
 				{
@@ -139,11 +155,11 @@
 					[
 						3
 					],
-					"name" : "LRU_cache_test",
+					"name" : "lru_cache_test",
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						0
+						3
 					]
 				},
 				{
@@ -155,7 +171,7 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						4
+						5
 					]
 				},
 				{
@@ -167,19 +183,24 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						1
+						0
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						6
+					],
+					"name" : "kmp_test",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
 					]
 				}
 			],
 			"targets" : 
 			[
-				{
-					"directoryIndex" : 3,
-					"id" : "LRU_cache_test::@89c51acf5d01a58bf75c",
-					"jsonFile" : "target-LRU_cache_test-6b21446e4c1f05ceec90.json",
-					"name" : "LRU_cache_test",
-					"projectIndex" : 3
-				},
 				{
 					"directoryIndex" : 5,
 					"id" : "btree_test::@f628d899a86017748b3a",
@@ -193,6 +214,20 @@
 					"jsonFile" : "target-con_hash_test-f715f9e70ff572af56e5.json",
 					"name" : "con_hash_test",
 					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 6,
+					"id" : "kmp_test::@128f62e19b005930d8df",
+					"jsonFile" : "target-kmp_test-6f89cc8e804b6c62792e.json",
+					"name" : "kmp_test",
+					"projectIndex" : 6
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "lru_cache_test::@ddc5ec68d396064612ca",
+					"jsonFile" : "target-lru_cache_test-56e149bc16e7529bc31c.json",
+					"name" : "lru_cache_test",
+					"projectIndex" : 3
 				},
 				{
 					"directoryIndex" : 1,

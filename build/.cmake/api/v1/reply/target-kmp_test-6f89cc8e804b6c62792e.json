@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "LRU_cache/LRU_cache_test"
+			"path" : "kmp/kmp_test"
 		}
 	],
 	"backtrace" : 1,
@@ -14,7 +14,7 @@
 		],
 		"files" : 
 		[
-			"LRU_cache/CMakeLists.txt"
+			"kmp/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -48,7 +48,7 @@
 			]
 		}
 	],
-	"id" : "LRU_cache_test::@89c51acf5d01a58bf75c",
+	"id" : "kmp_test::@128f62e19b005930d8df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -60,12 +60,12 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "LRU_cache_test",
-	"nameOnDisk" : "LRU_cache_test",
+	"name" : "kmp_test",
+	"nameOnDisk" : "kmp_test",
 	"paths" : 
 	{
-		"build" : "LRU_cache",
-		"source" : "LRU_cache"
+		"build" : "kmp",
+		"source" : "kmp"
 	},
 	"sourceGroups" : 
 	[
@@ -82,7 +82,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "LRU_cache/LRU_cache_test.cpp",
+			"path" : "kmp/kmp_test.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],
