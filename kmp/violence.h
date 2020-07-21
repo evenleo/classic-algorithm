@@ -12,7 +12,7 @@ using namespace std;
 * 如果失配（即 S[i] != P[j]），重置 i = i - (j - 1)，j = 0。相当于每次匹配失败时，
 * i 回退，j 被置为 0。
 */
-int violenceSearch(std::string& str, std::string& match)
+int violenceSearch(const std::string& str, const std::string& match)
 {
   int strLen = str.size(); 
   int matchLen = match.size();
@@ -33,9 +33,8 @@ int violenceSearch(std::string& str, std::string& match)
       j = 0;
     }
   }
-  if (j == matchLen)
-    return i - j;
-  return -1;
+
+  return j == matchLen ? i - j : -1;
 }
 
 
