@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-#define private public
+#define private public  // 万恶的宏定义
 
 typedef bool color_type;
 const color_type rb_tree_red = false;

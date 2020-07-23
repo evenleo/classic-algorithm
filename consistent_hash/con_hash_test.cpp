@@ -1,4 +1,4 @@
-#include "consistent_hash.h"
+#include "consistentHash.h"
 #include <cassert>
 #include <iostream>
 
@@ -6,11 +6,11 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-  consistent_hash conhash;
-  conhash.add_node("192.168.0.1:8080", 2);
-  conhash.add_node("192.168.0.2:8081", 3);
-  conhash.add_node("10.0.1.56:8082", 2);
-  conhash.add_node("10.0.1.57:8083", 3);
+  consistentHash conhash;
+  conhash.addNode("192.168.0.1:8080", 2);
+  conhash.addNode("192.168.0.2:8081", 3);
+  conhash.addNode("10.0.1.56:8082", 2);
+  conhash.addNode("10.0.1.57:8083", 3);
 
   conhash.helper();
   conhash.visit();
@@ -20,7 +20,7 @@ int main(int argc, char** argv)
   server_name = conhash.get_server_name("128.0.0.1");
   cout << "server_name: " << server_name << std::endl;
 
-  conhash.del_node("10.0.1.56:8082");
+  conhash.delNode("10.0.1.56:8082");
   server_name = conhash.get_server_name("128.0.0.1");
   cout << "server_name: " << server_name << std::endl;
 }

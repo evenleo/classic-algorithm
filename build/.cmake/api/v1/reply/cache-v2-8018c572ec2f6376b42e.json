@@ -759,7 +759,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "7"
+			"value" : "8"
 		},
 		{
 			"name" : "CMAKE_OBJCOPY",
@@ -1192,6 +1192,30 @@
 			],
 			"type" : "STATIC",
 			"value" : "/home/even/workspace/classic-algorithm/consistent_hash"
+		},
+		{
+			"name" : "hashmap_test_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/even/workspace/classic-algorithm/build/hashmap"
+		},
+		{
+			"name" : "hashmap_test_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/even/workspace/classic-algorithm/hashmap"
 		},
 		{
 			"name" : "kmp_test_BINARY_DIR",
